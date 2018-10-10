@@ -20,12 +20,16 @@
 * ImageMin
 * Slick Carrousel
 * ScrollReveal
+* Normalize
 
 # Structure from Folder
 
 ```
 boiler-plate-started-front-end/
 	├── build/
+	│	├──	jade/
+	│	│	└──	_includes
+	│	└──	sass/
 	├── fonts/
 	├── img/
 	├── js/

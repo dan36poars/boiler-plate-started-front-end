@@ -4,7 +4,7 @@
 
 **npm install**
 
-## aftter enter:
+## after enter:
 
 **npm install -g gulp-cli**
 
@@ -18,3 +18,5 @@
 * Sass
 * Jade
 * ImageMin
+* Slick Carrousel
+* ScrollReveal

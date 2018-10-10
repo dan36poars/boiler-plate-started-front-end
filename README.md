@@ -2,11 +2,11 @@
 
 ## How To install: 
 
-**` - npm install`**
+**` npm install`**
 
 ## after enter:
 
-**` - npm install -g gulp-cli`**
+**` npm install -g gulp-cli`**
 
 # tools installed in this packaged:
 

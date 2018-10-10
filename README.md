@@ -1,4 +1,4 @@
-# Boiler Plate For Started Front End Projets
+# Boiler Plate For Started Front End Projects
 
 ## How To install: 
 
@@ -20,3 +20,17 @@
 * ImageMin
 * Slick Carrousel
 * ScrollReveal
+
+# Structure from Folder
+
+```
+boiler-plate-started-front-end/
+	├── build/
+	├── fonts/
+	├── img/
+	├── js/
+	gulpfile.js
+	package.json
+	README.md
+```
+after install the and run gulp inside the project the WWW folder appear it and this is the your distribuite folder.

@@ -6,11 +6,11 @@
 
 ## after enter:
 
-**npm install -g gulp-cli**
+**`npm install -g gulp-cli`**
 
 # tools installed in this packaged:
 
-* Bootstrap
+* Bootstrap 4
 * Font-Awesome 4.7
 * Jquery Migrate
 * Jquery

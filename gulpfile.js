@@ -5,7 +5,7 @@ const 	gulp        = require('gulp'),
 		jade        = require('gulp-jade'),
 		prefix      = require('gulp-autoprefixer'),
 		sass        = require('gulp-sass'),
-		imagemin    = require('gulp-imagemin'),
+		imagemin    = require('gulp-imagemin'),	
 		sourcemaps  = require('gulp-sourcemaps');
 
 const paths = {
@@ -31,8 +31,52 @@ const load = {
 	imageMin: 'imageMin',
 	customJs:  'custom-js',
 	popper: 'popper',
-	normalize: 'normalize'
+	normalize: 'normalize',
+	slickCss: 'slick-css',
+	slickJs: 'slick-js',
+	slickFonts: 'fonts-slick',
+	scrollReveal: 'scroll-reveal'
 };
+
+/*
+* ScrollReveal
+*/
+gulp.task('scroll-reveal', () => {
+	return gulp.src('node_modules/scrollreveal/dist/scrollreveal.min.js')
+	.pipe(sourcemaps.init())
+	.pipe(sourcemaps.write('.'))
+	.pipe(gulp.dest(paths.js))
+	.pipe(browserSync.reload({stream: true}));
+});
+
+/*
+* Slick Css
+*/
+gulp.task('slick-css', () => {
+	return gulp.src(['node_modules/slick-carousel/slick/slick.scss', 'node_modules/slick-carousel/slick/slick-theme.scss'])
+	.pipe(gulp.dest( paths.sass ))
+	.pipe(browserSync.reload({stream: true}));
+});
+
+/*
+* Slick Js
+*/
+gulp.task('slick-js', () => {
+	return gulp.src('node_modules/slick-carousel/slick/slick.min.js')
+	.pipe(sourcemaps.init())
+	.pipe(sourcemaps.write('.'))
+	.pipe(gulp.dest( paths.js ))
+	.pipe(browserSync.reload({stream: true}));
+});
+
+/*
+* Fonts Slick
+*/
+gulp.task('fonts-slick', () => {
+	return gulp.src('node_modules/slick-carousel/slick/fonts/*')
+	.pipe(gulp.dest(paths.fonts + '/fonts-slick'));
+});
+
 
 /*
 * Font-AweSome
@@ -168,9 +212,7 @@ gulp.task('imageMin', function(){
 * Create the normalize file SCSS
 */
 gulp.task('normalize', ()=>{
-	return gulp.src('node_modules/normalize-scss/sass/normalize/*.scss')	
-	.pipe(gulp.dest(paths.sass + '/normalize'))
-	gulp.src('node_modules/normalize-scss/sass/*.scss')
+	return gulp.src('node_modules/normalize-scss/sass/**/*')
 	.pipe(gulp.dest( paths.sass ))
 	.pipe(browserSync.reload({stream: true}));
 });
@@ -180,7 +222,7 @@ gulp.task('normalize', ()=>{
 * Custom Js
 */
 gulp.task('custom-js', ()=>{
-	return gulp.src('js/*')
+	return gulp.src('js/*')	
 	.pipe(sourcemaps.init())
 	.pipe(sourcemaps.write('.'))
 	.pipe(gulp.dest('www/js'))
@@ -212,7 +254,11 @@ gulp.task('browser-sync',[
 	load.jquery,
 	load.fonts,
 	load.jade,
-	load.normalize,
+	load.normalize,	
+	load.slickCss,
+	load.slickJs,
+	load.slickFonts,
+	load.scrollReveal,
 	load.sass,
 	load.imageMin,
 	load.customJs,
@@ -227,11 +273,11 @@ gulp.task('browser-sync',[
 });
 
 gulp.task('watch', () => {
-	gulp.watch(paths.sass + '/*.scss', ['sass']);
+	gulp.watch(paths.sass + '/**/*.scss', ['sass']);
 	gulp.watch(paths.jade + '/**/*.jade', ['jade-rebuild']);
 	gulp.watch(paths.js + '/*.js', ['browser-reload']);
 	gulp.watch('img/*', ['imageMin']);
-	gulp.watch('js/*.js', ['js']);
+	gulp.watch('js/*.js', ['custom-js']);
 	gulp.watch('fonts/**/*', ['fonts']);
 });
 

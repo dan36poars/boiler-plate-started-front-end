@@ -1,0 +1,22 @@
+@mixin text-shadow( $x, $y, $z, $color ) {
+	text-shadow: $x $y $z $color;
+}
+
+@mixin hover-buttom( $color ){
+	color: $color;
+		&:hover {
+			color: lighten($color, 25%);
+		}
+}
+
+@mixin browser($browsers: Mozilla) {
+  @each $browser in $browsers {
+    html[data-browser*="#{$browser}"] & {
+      @content;
+    }
+  }
+}
+
+@mixin text-stroke($size: 2, $color: #fff, $correction: 0) {
+	text-shadow: text-stroke($size, $color, $correction);
+}

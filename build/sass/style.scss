@@ -1,2 +1,16 @@
+// Normalize
+@import 'normalize';
+@include normalize();
+
+// ste files from project
 @import 'variables';
 @import 'base';
+
+// mixins
+@import 'mixins/mixins';
+
+// functions
+@import 'functions/functions';
+
+// modules
+@import 'modules/m-carousel';

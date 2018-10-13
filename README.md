@@ -49,4 +49,4 @@ after install the and run gulp inside the project the WWW folder appear it and t
 You do have the create the folders ``fonts/`` and ``img/`` in the root folder.
 
 # after install
-Go inside the **``node_modules/slick-carousel/slick/slick-theme.scss``** and update the path variable $slick-font-path to **``"./fonts/fonts-slick/"``** and rerun the **``gulp``**
+Go inside the **``node_modules/slick-carousel/slick/slick-theme.scss``** and update the path variable $slick-font-path to **``"./fonts/fonts-slick/"``** and **``node_modules/font-awesome/scss/_variables.scss``** and update the path variable $fa-font-path to **``"../fonts/fonts-awesome"``** after rerun the **``gulp``**

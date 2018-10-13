@@ -28,7 +28,8 @@
 boiler-plate-started-front-end/
 	├── build/
 	│	├──	jade/
-	│	│	└──	_includes
+	│	│	├──	_includes/
+	│	│	├── index.jade
 	│	└──	sass/
 	├── fonts/
 	├── img/
@@ -38,3 +39,6 @@ boiler-plate-started-front-end/
 	README.md
 ```
 after install the and run gulp inside the project the WWW folder appear it and this is the your distribuite folder.
+
+# after install
+Go inside the **``slick-carousel/slick/slick-theme.scss``** and update the path **``$slick-font-path``** to **``"./fonts/fonts-slick/"``**

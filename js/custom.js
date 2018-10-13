@@ -15,8 +15,8 @@ function slick () {
 	  infinite: false,
 	  speed: 300,
 	  Arrows: true,
-	  nextArrow: '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
-	  prevArrow: '<i class="fa fa-arrow-left" aria-hidden="true"></i>',
+	  // nextArrow: '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
+	  // prevArrow: '<i class="fa fa-arrow-left" aria-hidden="true"></i>',
 	  slidesToShow: 3,
 	  slidesToScroll: 3,
 	  responsive: [

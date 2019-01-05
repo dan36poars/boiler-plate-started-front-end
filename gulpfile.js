@@ -6,6 +6,8 @@ const 	gulp        = require('gulp'),
 		prefix      = require('gulp-autoprefixer'),
 		sass        = require('gulp-sass'),
 		imagemin    = require('gulp-imagemin'),	
+		babel 		= require('gulp-babel'),
+		concat      = require('gulp-concat'),
 		sourcemaps  = require('gulp-sourcemaps');
 
 const paths = {
@@ -29,7 +31,7 @@ const load = {
 	jade: 'jade',
 	sass: 'sass',
 	imageMin: 'imageMin',
-	customJs:  'custom-js',
+	babelJs: 'babel-js',
 	popper: 'popper',
 	normalize: 'normalize',
 	slickCss: 'slick-css',
@@ -191,20 +193,21 @@ gulp.task('sass', () => {
 			outputStyle: 'compressed'
 		}))
 		.on('error', sass.logError)
-		.pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7']))
+		.pipe(prefix(['last 2 versions', '> 1%', 'ie 11']))
 		.pipe(sourcemaps.init())
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest(paths.css))
 		.pipe(browserSync.reload({stream: true}));
+		browserSync.reload();
 });
 
 /*
 * ImageMin
 */
 gulp.task('imageMin', function(){
-	gulp.src('img/*')
-    .pipe(imagemin())
-    .pipe(gulp.dest('www/img'))
+	gulp.src('images/**/*')
+    .pipe(imagemin([], { verbose: true }))
+    .pipe(gulp.dest('www/images'))
     .pipe(browserSync.reload({stream: true}));
 });
 
@@ -217,15 +220,18 @@ gulp.task('normalize', ()=>{
 	.pipe(browserSync.reload({stream: true}));
 });
 
-
 /*
-* Custom Js
+* Babel
 */
-gulp.task('custom-js', ()=>{
-	return gulp.src('js/*')	
+gulp.task('babel-js', () => {
+	return gulp.src(['node_modules/babel-polyfill/dist/polyfill.js','js/**/*.js'])
 	.pipe(sourcemaps.init())
+	.pipe(babel({
+		presets: ['env']
+	}))
+	.pipe(concat('all.js'))
 	.pipe(sourcemaps.write('.'))
-	.pipe(gulp.dest('www/js'))
+	.pipe(gulp.dest( paths.js ))
 	.pipe(browserSync.reload({stream: true}));
 });
 
@@ -247,9 +253,7 @@ gulp.task('browser-reload', ()=> {
 
 gulp.task('browser-sync',[ 
 	load.fontAwesome, 
-	load.fontsFontAwesome,
-	load.bootstrapCss,
-	load.bootstrapJs,
+	load.fontsFontAwesome,	
 	load.jqueryMigrate,
 	load.jquery,
 	load.fonts,
@@ -261,8 +265,7 @@ gulp.task('browser-sync',[
 	load.scrollReveal,
 	load.sass,
 	load.imageMin,
-	load.customJs,
-	load.popper
+	load.babelJs	
 	]
 	, () => {
 	browserSync({
@@ -275,9 +278,9 @@ gulp.task('browser-sync',[
 gulp.task('watch', () => {
 	gulp.watch(paths.sass + '/**/*.scss', ['sass']);
 	gulp.watch(paths.jade + '/**/*.jade', ['jade-rebuild']);
-	gulp.watch(paths.js + '/*.js', ['browser-reload']);
-	gulp.watch('img/*', ['imageMin']);
-	gulp.watch('js/*.js', ['custom-js']);
+	// gulp.watch(paths.js + '/*.js', ['browser-reload']);
+	gulp.watch('images/*', ['imageMin']);
+	gulp.watch('js/**/*.js', ['babel-js']);
 	gulp.watch('fonts/**/*', ['fonts']);
 });
 

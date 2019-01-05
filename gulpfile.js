@@ -278,7 +278,6 @@ gulp.task('browser-sync',[
 gulp.task('watch', () => {
 	gulp.watch(paths.sass + '/**/*.scss', ['sass']);
 	gulp.watch(paths.jade + '/**/*.jade', ['jade-rebuild']);
-	// gulp.watch(paths.js + '/*.js', ['browser-reload']);
 	gulp.watch('images/*', ['imageMin']);
 	gulp.watch('js/**/*.js', ['babel-js']);
 	gulp.watch('fonts/**/*', ['fonts']);

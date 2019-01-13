@@ -8,7 +8,8 @@ const 	gulp        = require('gulp'),
 		imagemin    = require('gulp-imagemin'),	
 		babel 		= require('gulp-babel'),
 		concat      = require('gulp-concat'),
-		sourcemaps  = require('gulp-sourcemaps');
+		sourcemaps  = require('gulp-sourcemaps'),
+		uglifyJS    = require('gulp-uglify');
 
 const paths = {
 	root: 'www',
@@ -226,10 +227,9 @@ gulp.task('normalize', ()=>{
 gulp.task('babel-js', () => {
 	return gulp.src(['node_modules/babel-polyfill/dist/polyfill.js','js/**/*.js'])
 	.pipe(sourcemaps.init())
-	.pipe(babel({
-		presets: ['env']
-	}))
+	.pipe(babel())
 	.pipe(concat('all.js'))
+	.pipe(uglifyJS())
 	.pipe(sourcemaps.write('.'))
 	.pipe(gulp.dest( paths.js ))
 	.pipe(browserSync.reload({stream: true}));
@@ -246,7 +246,7 @@ gulp.task('jade-rebuild', ['jade'], ()=> {
 * Reload the Brower Sync
 */
 gulp.task('browser-reload', ()=> {
-	browserSync.reload();
+	browserSync.reload({stream: true});
 });
 
 
@@ -278,8 +278,8 @@ gulp.task('browser-sync',[
 gulp.task('watch', () => {
 	gulp.watch(paths.sass + '/**/*.scss', ['sass']);
 	gulp.watch(paths.jade + '/**/*.jade', ['jade-rebuild']);
-	gulp.watch('images/*', ['imageMin']);
-	gulp.watch('js/**/*.js', ['babel-js']);
+	gulp.watch('images/**/*', ['imageMin']);
+	gulp.watch('js/**/*', ['babel-js']);
 	gulp.watch('fonts/**/*', ['fonts']);
 });
 
